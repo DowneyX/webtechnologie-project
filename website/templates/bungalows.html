@@ -1,0 +1,25 @@
+<!--inherits from this base -->
+{% extends "bases/base.html" %}
+
+<!--page specific title -->
+{% block title %} bungalows {% endblock %}
+
+<!--page specific css -->
+{% block stylesheet %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/bungalows.css') }}"
+/>
+{% endblock %}
+
+<!--page specific content -->
+{% block content %}
+<div class="wrapper">
+  <div class="filter-container inline">
+    <p class="title">filter</p>
+  </div>
+  <div class="bungalows-container inline">
+    <h1 class="title">bungalows</h1>
+  </div>
+</div>
+{% endblock %}

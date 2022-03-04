@@ -1,0 +1,30 @@
+.inline {
+  display: inline-block;
+}
+
+.bungalows-container {
+  background-color: white;
+  float: right;
+  width: calc(98% - 250px);
+  border-radius: 10px;
+  display: inline-flex;
+}
+
+.title {
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.filter-container {
+  background-color: white;
+  width: 250px;
+  height: 400px;
+  border-radius: 10px;
+  display: inline-flex;
+}
+
+.wrapper {
+  padding: 0 50px;
+}
