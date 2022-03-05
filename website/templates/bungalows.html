@@ -20,6 +20,26 @@
   </div>
   <div class="bungalows-container inline">
     <h1 class="title">bungalows</h1>
+    <div class="center-content">
+      {% for i in bungalows %}
+
+      <div class="product-frame">
+        <a class="normalize-link" href="">
+          <img
+            width="200"
+            height="200"
+            src="static/uploads/{{i.image}}"
+            alt=""
+          />
+          <p class="product-name">{{i.name}}</p>
+          <p class="product-price">
+            <i class="fa-solid fa-euro-sign"></i>{{i.price}}
+          </p>
+        </a>
+      </div>
+
+      {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}
