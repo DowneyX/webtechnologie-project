@@ -131,10 +131,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.content-container {
-  padding-top: 100px;
-}
-
 .normalize-link:link {
   text-decoration: none;
 }

@@ -1,0 +1,73 @@
+{% extends "bases/base-no-navbar.html" %}
+
+<!--page specific title -->
+{% block title %} sign-up {% endblock %}
+
+<!--page specific css -->
+{%block stylesheet %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/sign-up.css') }}"
+/>
+{% endblock %}
+
+<!--page specific content -->
+{% block content %}
+
+<div class="sign-up-container-parent">
+  <div class="sign-up-container">
+    <a class="normalize-link" href="/">
+      <i class="fa-solid fa-xmark"></i>
+    </a>
+
+    <h2>Sign up</h2>
+    <form method="POST">
+      <div class="">
+        <div class="field-container">
+          <label for="email">E-mail</label>
+          <input id="email" type="" placeholder="email" required />
+        </div>
+
+        <div class="field-container">
+          <label for="username">user name</label>
+          <input id="username" type="text" placeholder="user name" required />
+        </div>
+
+        <div class="field-container">
+          <label for="display name">display name</label>
+          <input
+            id="display name"
+            type="text"
+            placeholder="display name"
+            required
+          />
+        </div>
+
+        <div class="field-container">
+          <label for="password"> Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="password"
+            required
+          />
+        </div>
+
+        <div class="field-container">
+          <label for="password"> Password again</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="password again"
+            required
+          />
+        </div>
+      </div>
+
+      <div>
+        <button class="button" type="submit">sign-up</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
