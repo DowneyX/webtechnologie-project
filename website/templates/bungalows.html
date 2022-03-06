@@ -24,11 +24,11 @@
       {% for i in bungalows %}
 
       <div class="product-frame">
-        <a class="normalize-link" href="">
+        <a class="normalize-link" href="bungalows/bungalow/{{i.id}}">
           <img
             width="200"
             height="200"
-            src="static/uploads/{{i.image}}"
+            src="{{ url_for('static', filename=i.image)}}"
             alt=""
           />
           <p class="product-name">{{i.name}}</p>

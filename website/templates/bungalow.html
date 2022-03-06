@@ -1,0 +1,53 @@
+<!--inherits from this base -->
+{% extends "bases/base.html" %}
+
+<!--page specific title -->
+{% block title %} bungalow: {{bungalow.name}} {% endblock %}
+
+<!--page specific css -->
+{% block stylesheet %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/bungalow.css') }}"
+/>
+{% endblock %}
+
+<!--page specific content -->
+<div class="content-container">
+  {% block content %}
+
+  <div class="container">
+    <div class="calendar">
+      <div class="month">
+        <i class="fas fa-angle-left prev"></i>
+        <div class="date">
+          <h1></h1>
+          <p></p>
+        </div>
+        <i class="fas fa-angle-right next"></i>
+      </div>
+      <div class="weekdays">
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+        <div>Sun</div>
+      </div>
+      <div class="days"></div>
+    </div>
+  </div>
+  <form action="">
+    <input type="week" />
+  </form>
+  <img src="{{ url_for('static', filename=bungalow.image)}}" alt="" />
+  <p>{{bungalow.id}}</p>
+  <p>{{bungalow.name}}</p>
+  <p>{{bungalow.description}}</p>
+  <p>{{bungalow.price}}</p>
+  <p>{{bungalow.num_people}}</p>
+
+  <script src="{{ url_for('static', filename='js/calender.js') }}"></script>
+  {% endblock %}
+</div>
