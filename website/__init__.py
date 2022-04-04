@@ -4,14 +4,15 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 DB_NAME = 'database.db'
 
+
 def create_app():
     app = Flask(__name__)
-    UPLOAD_FOLDER = 'static/uploads' 
+    upload_folder = 'static/uploads'
 
     # WHEN IN PRODUCTION NEVER SHARE THIS KEY AND CHANGE IT TO SOMETHING THAT MAKES MORE SENSE
     app.config['SECRET_KEY'] = 'ThisIsSecret'
     app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_NAME}"
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    app.config['UPLOAD_FOLDER'] = upload_folder
     db.init_app(app)
 
     from .routes.views import views
@@ -23,5 +24,5 @@ def create_app():
     from .models import Users, Bungalows, Reservations
 
     db.create_all(app=app)
-    
+
     return app
