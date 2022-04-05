@@ -1,0 +1,11 @@
+<!--inherits from this base -->
+{% extends "bases/base.html" %}
+
+<!--page specific title -->
+{% block title %} test {% endblock %}
+
+<!--page specific css -->
+{% block stylesheet %} {% endblock %}
+
+<!--page specific content -->
+<div class="content-container">{% block content %} {% endblock %}</div>

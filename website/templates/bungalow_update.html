@@ -1,0 +1,43 @@
+<!--inherits from this base -->
+{% extends "bases/base.html" %}
+
+<!--page specific title -->
+{% block title %} test {% endblock %}
+
+<!--page specific css -->
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bungalow_create.css') }}">
+{% endblock %}
+
+<!--page specific content -->
+    <div class="content-container">
+        {% block content %} 
+        <div class="form-container-parent">
+            <div class="form-container">
+                <h2>Update bungalow</h2>
+                <form action="" method="post">
+                    {{ form.hidden_tag() }}
+                    <div class="field-container">
+                        {{ form.name.label }} {{form.name}}
+                    </div>
+                    
+                    <div class="field-container">
+                        {{ form.description.label }} {{form.description}}
+                    </div>
+                    
+                    <div class="field-container">
+                        {{ form.price.label }} {{form.price}}
+                    </div>
+            
+                    <div class="radio-container">
+                        {{ form.num_people.label }} {{form.num_people}}
+                    </div>
+            
+                    <div>
+                        <button class="button" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endblock %}
+</div>

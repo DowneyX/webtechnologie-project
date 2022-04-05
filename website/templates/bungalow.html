@@ -2,7 +2,7 @@
 {% extends "bases/base.html" %}
 
 <!--page specific title -->
-{% block title %} bungalow: {{bungalow.name}} {% endblock %}
+{% block title %} bungalow: {{bungalow_obj.name}} {% endblock %}
 
 <!--page specific css -->
 {% block stylesheet %}
@@ -41,12 +41,12 @@
   <form action="">
     <input type="week" />
   </form>
-  <img src="{{ url_for('static', filename=bungalow.image)}}" alt="" />
-  <p>{{bungalow.id}}</p>
-  <p>{{bungalow.name}}</p>
-  <p>{{bungalow.description}}</p>
-  <p>{{bungalow.price}}</p>
-  <p>{{bungalow.num_people}}</p>
+  <img src="{{ url_for('static', filename=bungalow_obj.image)}}" alt="" />
+  <p>{{bungalow_obj.id}}</p>
+  <p>{{bungalow_obj.name}}</p>
+  <p>{{bungalow_obj.description}}</p>
+  <p>{{bungalow_obj.price}}</p>
+  <p>{{bungalow_obj.num_people}}</p>
 
   <script src="{{ url_for('static', filename='js/calender.js') }}"></script>
   {% endblock %}

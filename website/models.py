@@ -7,7 +7,7 @@ class Bungalows(db.Model):
     name = db.Column(db.String(50), nullable=False, unique=True)
     Description = db.Column(db.Text(), nullable=True)
     num_people = db.Column(db.Integer(), nullable=False)
-    image = db.Column(db.String(100), nullable=False, unique=True)
+    image = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float(), nullable=False)
     reservations = db.relationship('Reservations', backref='bungalows')
 
