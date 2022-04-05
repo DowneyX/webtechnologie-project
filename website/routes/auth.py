@@ -1,12 +1,16 @@
-from flask import Blueprint, render_template, request
-from flask_login import login_required, current_user
+from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import login_required, current_user, logout_user, login_user
+from werkzeug.security import check_password_hash
+
 from ..models import User
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/login',  methods=['GET'])
+
+@auth.route('/login', methods=['GET'])
 def login():
-    return render_template('sign-in.html')
+    return render_template()
+
 
 @auth.route('/login', methods=['POST'])
 def login_post():
@@ -22,6 +26,7 @@ def login_post():
     login_user(user, remember=remember)
     return redirect(url_for('views.home'))
 
+
 @auth.route('/logout')
 @login_required
 def logout():
@@ -32,6 +37,7 @@ def logout():
 @auth.route('/signup', methods=['GET'])
 def signup():
     return render_template('sign-up.html')
+
 
 @auth.route('/signup', methods=['POST'])
 def signup_post():
