@@ -1,5 +1,4 @@
 from flask_login import UserMixin
-
 from . import db
 
 
@@ -14,21 +13,23 @@ class Bungalow(db.Model):
     price = db.Column(db.Float(), nullable=False)
     reservations = db.relationship('Reservations', backref='bungalows')
     created_at = db.Column(db.Date(), nullable=False)
-    updated_at = db.Column(db.Date(), nullable=False)
-    deleted_at = db.Column(db.Date(), nullable=False)
+    updated_at = db.Column(db.Date(), nullable=True)
+    deleted_at = db.Column(db.Date(), nullable=True)
 
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     uuid = db.Column(db.String, primary_key=True, nullable=False, unique=True)
+    email = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(100))
+    first_name = db.Column(db.String(1000))
+    last_name = db.Column(db.String(1000))
+    phone_nr = db.Column(db.String(1000))
     role = db.Column(db.String(16), nullable=False, default='user')
     reservations = db.relationship('Reservations', backref='users')
     created_at = db.Column(db.Date(), nullable=False)
-    updated_at = db.Column(db.Date(), nullable=False)
-    deleted_at = db.Column(db.Date(), nullable=False)
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
-    name = db.Column(db.String(1000))
+    updated_at = db.Column(db.Date(), nullable=True)
+    deleted_at = db.Column(db.Date(), nullable=True)
 
 
 class Reservation(db.Model):
@@ -36,9 +37,9 @@ class Reservation(db.Model):
     uuid = db.Column(db.String, primary_key=True, nullable=False, unique=True)
     bungalow = db.Column(db.Integer(), db.ForeignKey('bungalows.uuid'))
     user = db.Column(db.Integer(), db.ForeignKey('users.uuid'))
-    begin_date = db.Column(db.Date(), nullable=False)
+    start_date = db.Column(db.Date(), nullable=False)
     end_date = db.Column(db.Date(), nullable=False)
     total = db.Column(db.Float(), nullable=False)
     created_at = db.Column(db.Date(), nullable=False)
-    updated_at = db.Column(db.Date(), nullable=False)
-    deleted_at = db.Column(db.Date(), nullable=False)
+    updated_at = db.Column(db.Date(), nullable=True)
+    deleted_at = db.Column(db.Date(), nullable=True)
