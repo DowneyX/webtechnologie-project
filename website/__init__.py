@@ -6,7 +6,7 @@ DB_NAME = 'database.db'
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='templates')
     upload_folder = 'static/uploads'
 
     # WHEN IN PRODUCTION NEVER SHARE THIS KEY AND CHANGE IT TO SOMETHING THAT MAKES MORE SENSE

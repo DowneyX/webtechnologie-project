@@ -2,44 +2,40 @@
 {% extends "bases/base.html" %}
 
 <!--page specific title -->
-{% block title %} bungalows {% endblock %}
+{% block title %} Home {% endblock %}
 
 <!--page specific css -->
 {% block stylesheet %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/bungalows.css') }}"
-/>
+
 {% endblock %}
 
 <!--page specific content -->
 {% block content %}
-<div class="wrapper">
-  <div class="filter-container inline">
-    <p class="title">filter</p>
-  </div>
-  <div class="bungalows-container inline">
-    <h1 class="title">bungalows</h1>
-    <div class="center-content">
-      {% for i in bungalows %}
+<div class="flex items-center justify-center mt-12">
+  <div class="grid grid-cols-12 gap-2 gap-y-4 max-w-6xl">
+    {% for bungalow in bungalows %}
+    <div class="col-span-12 sm:col-span-6 md:col-span-3">
+      <card class="w-full flex flex-col">
+        <div class="relative">
+          <a href="#">
+            <img src="{{ url_for('static', filename=bungalow.image)}}" class="w-96 h-auto" />
+          </a>
+          <p class="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py">👨🏻‍🦳 {{bungalow.min_p}}-{{bungalow.max_p}} </p>
+          <p class="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py">👨🏻‍🦳 {{bungalow.min_p}}-{{bungalow.max_p}} </p>
+        </div>
 
-      <div class="product-frame">
-        <a class="normalize-link" href="bungalows/bungalow/{{i.id}}">
-          <img
-            width="200"
-            height="200"
-            src="{{ url_for('static', filename=i.image)}}"
-            alt=""
-          />
-          <p class="product-name">{{i.name}}</p>
-          <p class="product-price">
-            <i class="fa-solid fa-euro-sign"></i>{{i.price}}
-          </p>
-        </a>
-      </div>
-
-      {% endfor %}
+        <div class="flex flex-row mt-2 gap-2">
+          <div clas="flex flex-col">
+            <a href="#">
+              <p class="text-gray-100 text-sm font-semibold">{{bungalow.name}}</p>
+            </a>
+            <a class="text-gray-400 text-xs mt-2 hover:text-gray-100" href="#"> {{bungalow.description}} </a>
+          </div>
+        </div>
+      </card>
     </div>
-  </div>
+    {% endfor %}
 </div>
+</div>
+
 {% endblock %}

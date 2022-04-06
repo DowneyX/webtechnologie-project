@@ -11,7 +11,7 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login')
 def login():
-    return render_template('auth.sign-in')
+    return render_template('auth/sign-in.html')
 
 
 @auth.route('/login', methods=['POST'])
@@ -35,7 +35,7 @@ def login_post():
 
 @auth.route('/signup')
 def signup():
-    return render_template('signup.html')
+    return render_template('auth/sign-up.html')
 
 
 @auth.route('/signup', methods=['POST'])
@@ -51,7 +51,7 @@ def signup_post():
         flash('Email address already exists')
         return redirect(url_for('auth.signup'))
 
-    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+    new_user = User(uuid=uuid.uuid4, )
 
     db.session.add(new_user)
     db.session.commit()
