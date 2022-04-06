@@ -1,5 +1,4 @@
-from crypt import methods
-from datetime import date, datetime
+from datetime import datetime
 from flask import Blueprint, redirect, render_template, request, url_for
 from ..forms import bungalow_form
 from ..models import Bungalow
