@@ -1,7 +1,7 @@
-from . import db
-import uuid
 from flask_login import UserMixin
+
 from . import db
+
 
 class Bungalow(db.Model):
     __tablename__ = 'bungalows'
@@ -21,21 +21,21 @@ class Bungalow(db.Model):
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     uuid = db.Column(db.String, primary_key=True, nullable=False, unique=True)
-    username = db.Column(db.String(32), nullable=False, unique=True)
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.Text(), nullable=False)
     role = db.Column(db.String(16), nullable=False, default='user')
     reservations = db.relationship('Reservations', backref='users')
     created_at = db.Column(db.Date(), nullable=False)
     updated_at = db.Column(db.Date(), nullable=False)
     deleted_at = db.Column(db.Date(), nullable=False)
+    email = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(100))
+    name = db.Column(db.String(1000))
 
 
 class Reservation(db.Model):
     __tablename__ = 'reservations'
     uuid = db.Column(db.String, primary_key=True, nullable=False, unique=True)
-    bungalow = db.Column(db.Integer(), db.ForeignKey('bungalows.id'))
-    user = db.Column(db.Integer(), db.ForeignKey('users.id'))
+    bungalow = db.Column(db.Integer(), db.ForeignKey('bungalows.uuid'))
+    user = db.Column(db.Integer(), db.ForeignKey('users.uuid'))
     begin_date = db.Column(db.Date(), nullable=False)
     end_date = db.Column(db.Date(), nullable=False)
     total = db.Column(db.Float(), nullable=False)
