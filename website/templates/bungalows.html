@@ -21,17 +21,17 @@
   <div class="bungalows-container inline">
     <h1 class="title">bungalows</h1>
     <div class="center-content">
-      {% for i in bungalows %}
+      {% for i in bungalows_obj %}
 
       <div class="product-frame">
-        <a class="normalize-link" href="bungalows/bungalow/{{i.id}}">
+        <a class="normalize-link" href="bungalows/bungalow/{{i.uuid}}">
           <img
             width="200"
             height="200"
-            src="{{ url_for('static', filename=i.image)}}"
+            src="{{ url_for('static', filename=i.img_b64)}}"
             alt=""
           />
-          <p class="product-name">{{i.name}}</p>
+          <p class="product-name">{{i.title}}</p>
           <p class="product-price">
             <i class="fa-solid fa-euro-sign"></i>{{i.price}}
           </p>

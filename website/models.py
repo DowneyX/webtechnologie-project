@@ -1,31 +1,43 @@
 from . import db
+from sqlalchemy.dialects.postgresql import UUID
+from flask_login import UserMixin
+import uuid
 
-
-class Bungalows(db.Model):
+class Bungalow(db.Model):
     __tablename__ = 'bungalows'
-    id = db.Column(db.Integer(), primary_key=True, nullable=False, unique=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
-    Description = db.Column(db.Text(), nullable=True)
-    num_people = db.Column(db.Integer(), nullable=False)
-    image = db.Column(db.String(100), nullable=False)
+    uuid = db.Column(db.Integer(), primary_key=True)
+    title = db.Column(db.String(50), nullable=False, unique=True)
+    description = db.Column(db.Text(), nullable=True)
+    max_p = db.Column(db.Integer(), nullable=False)
+    img_b64 = db.Column(db.String(100), nullable=False, unique=False)
     price = db.Column(db.Float(), nullable=False)
-    reservations = db.relationship('Reservations', backref='bungalows')
+    reservations = db.relationship('Reservation', backref='bungalows')
+    created_at = db.Column(db.Date(), nullable=False)
+    updated_at = db.Column(db.Date(), nullable=False)
+    deleted_at = db.Column(db.Date(), nullable=True)
 
 
-class Users(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer(), primary_key=True, nullable=False, unique=True)
+    uuid = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(32), nullable=False, unique=True)
+    email = db.Column(db.String(100), unique=True)
     password = db.Column(db.Text(), nullable=False)
     role = db.Column(db.String(16), nullable=False, default='user')
-    reservations = db.relationship('Reservations', backref='users')
+    reservations = db.relationship('Reservation', backref='users')
+    created_at = db.Column(db.Date(), nullable=False)
+    updated_at = db.Column(db.Date(), nullable=False)
+    deleted_at = db.Column(db.Date(), nullable=True)
 
 
-class Reservations(db.Model):
+class Reservation(db.Model):
     __tablename__ = 'reservations'
-    id = db.Column(db.Integer(), primary_key=True, nullable=False, unique=True)
-    bunglalows = db.Column(db.Integer(), db.ForeignKey('bungalows.id'))
-    user = db.Column(db.Integer(), db.ForeignKey('users.id'))
-    beg_date = db.Column(db.Date(), nullable=False)
+    uuid = db.Column(db.Integer(), primary_key=True)
+    bungalow = db.Column(db.Integer(), db.ForeignKey('bungalows.uuid'))
+    user = db.Column(db.Integer(), db.ForeignKey('users.uuid'))
+    begin_date = db.Column(db.Date(), nullable=False)
     end_date = db.Column(db.Date(), nullable=False)
     total = db.Column(db.Float(), nullable=False)
+    created_at = db.Column(db.Date(), nullable=False)
+    updated_at = db.Column(db.Date(), nullable=False)
+    deleted_at = db.Column(db.Date(), nullable=True)

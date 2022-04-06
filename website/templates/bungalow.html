@@ -17,7 +17,7 @@
   {% block content %}
 
   <div class="container">
-    <div class="calendar">
+    <div class="calender">
       <div class="month">
         <i class="fas fa-angle-left prev"></i>
         <div class="date">
@@ -38,15 +38,13 @@
       <div class="days"></div>
     </div>
   </div>
-  <form action="">
-    <input type="week" />
-  </form>
-  <img src="{{ url_for('static', filename=bungalow_obj.image)}}" alt="" />
-  <p>{{bungalow_obj.id}}</p>
-  <p>{{bungalow_obj.name}}</p>
+  <form action=""></form>
+  <img src="{{ url_for('static', filename=bungalow_obj.img_b64)}}" alt="" />
+  <p>{{bungalow_obj.uuid}}</p>
+  <p>{{bungalow_obj.title}}</p>
   <p>{{bungalow_obj.description}}</p>
   <p>{{bungalow_obj.price}}</p>
-  <p>{{bungalow_obj.num_people}}</p>
+  <p>{{bungalow_obj.max_p}}</p>
 
   <script src="{{ url_for('static', filename='js/calender.js') }}"></script>
   {% endblock %}
