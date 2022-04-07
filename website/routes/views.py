@@ -1,8 +1,11 @@
-from datetime import datetime
+from datetime import datetime, date
+import imp
+from posixpath import split
 from flask import Blueprint, redirect, render_template, request, url_for
-from ..forms import bungalow_form
-from ..models import Bungalow
+from ..forms import Create_bungalow_form, Create_Reservation_form
+from ..models import Bungalow, Reservation
 from .. import db
+import sys
 
 views = Blueprint('views', __name__)
 
@@ -11,17 +14,35 @@ views = Blueprint('views', __name__)
 @views.route('/')
 def home():
     bungalows_obj = Bungalow().query.all()
-    return render_template('bungalows.html', bungalows_obj=bungalows_obj)
+    return render_template('bungalows.html', bungalows_obj = bungalows_obj)
 
 
-@views.route('bungalows/bungalow/<int:bungalow_id>')
+@views.route("bungalows/bungalow/<int:bungalow_id>", methods = ['GET', 'POST'])
 def bungalow(bungalow_id):
+    form = Create_Reservation_form()
     bungalow_obj = Bungalow().query.get_or_404(bungalow_id)
-    return render_template('bungalow.html', bungalow_obj=bungalow_obj)
 
-@views.route("/bungalows/create", methods= ['GET', 'POST'])
+    #form submitted
+    if form.validate_on_submit():
+        reservation_obj = Reservation()
+        reservation_obj.bungalow = bungalow_obj.uuid
+        reservation_obj.user = None
+        reservation_obj.begin_date = form.begin_date
+        reservation_obj.end_date = form.end_date
+        reservation_obj.created_at = datetime.now()
+        reservation_obj.updated_at = datetime.now()
+
+        # add to database 
+
+        # db.session.add(reservation_obj)
+        # db.session.commit()
+        # return redirect(url_for('<url>'))
+
+    return render_template('bungalow.html', bungalow_obj = bungalow_obj, form = form)
+
+@views.route("/bungalows/create", methods = ['GET', 'POST'])
 def create_bungalow():
-    form = bungalow_form()
+    form = Create_bungalow_form()
 
     #form submitted
     if form.validate_on_submit():
@@ -39,12 +60,12 @@ def create_bungalow():
         db.session.commit()
         return redirect(url_for('views.bungalow',bungalow_id = bungalow_obj.uuid ))
 
-    return render_template('bungalow_create.html', form=form)
+    return render_template('bungalow_create.html', form = form)
 
 
-@views.route("/bungalows/update/<int:bungalow_id>", methods= ['GET', 'POST'])
+@views.route("/bungalows/update/<int:bungalow_id>", methods = ['GET', 'POST'])
 def update_bungalow(bungalow_id):
-    form = bungalow_form()
+    form = Create_bungalow_form()
     bungalow_obj = Bungalow().query.get_or_404(bungalow_id)
 
     #form submitted
@@ -66,4 +87,4 @@ def update_bungalow(bungalow_id):
     form.price.data = bungalow_obj.price
     form.max_p.data = bungalow_obj.max_p
 
-    return render_template('bungalow_update.html', form=form)
+    return render_template('bungalow_update.html', form = form)

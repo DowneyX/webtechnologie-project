@@ -1,85 +1,166 @@
-const date = new Date();
+var renderedDate = new Date();
+var selectedDate = new Date();
+var hasSelected = false;
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const renderCalendar = () => {
-    date.setDate(1);
+  renderedDate.setHours(0, 0, 0, 0);
+  selectedDate.setHours(0, 0, 0, 0);
+  renderedDate.setDate(1);
 
-    const monthDays = document.querySelector(".days");
+  const monthDays = document.querySelector(".days");
 
-    const lastDay = new Date(
-        date.getFullYear(),
-        date.getMonth() + 1,
-        0
-    ).getDate();
+  const lastDay = new Date(
+    renderedDate.getFullYear(),
+    renderedDate.getMonth() + 1,
+    0
+  ).getDate();
 
-    const prevLastDay = new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        0
-    ).getDate();
+  const prevLastDay = new Date(
+    renderedDate.getFullYear(),
+    renderedDate.getMonth(),
+    0
+  ).getDate();
 
-    const firstDayIndex = date.getDay();
+  const firstDayIndex = renderedDate.getDay();
 
-    const lastDayIndex = new Date(
-        date.getFullYear(),
-        date.getMonth() + 1,
-        0
-    ).getDay();
+  const lastDayIndex = new Date(
+    renderedDate.getFullYear(),
+    renderedDate.getMonth() + 1,
+    0
+  ).getDay();
 
-    const nextDays = 7 - lastDayIndex - 1;
+  const nextDays = 7 - lastDayIndex - 1;
 
-    const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-    ];
+  document.querySelector(".date h1").innerHTML =
+    months[renderedDate.getMonth()];
 
-    document.querySelector(".date h1").innerHTML = months[date.getMonth()];
+  document.querySelector(".date p").innerHTML = renderedDate.getFullYear();
 
-    document.querySelector(".date p").innerHTML = new Date().toDateString();
+  let days = "";
+  var nextWeekDate = new Date(
+    selectedDate.getFullYear(),
+    selectedDate.getMonth(),
+    selectedDate.getDate() + 6
+  );
+  nextWeekDate.setHours(0, 0, 0, 0);
 
-    let days = "";
+  //generating days in last month
+  for (let x = firstDayIndex - 1; x > 0; x--) {
+    var forDate = new Date(
+      renderedDate.getFullYear(),
+      renderedDate.getMonth() - 1,
+      prevLastDay - x + 1
+    );
+    forDate.setHours(0, 0, 0, 0);
 
-    for (let x = firstDayIndex - 1; x > 0; x--) {
-        days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
+    if (forDate >= selectedDate && forDate <= nextWeekDate && hasSelected) {
+      days += `<div class="prev-date selected-day">${
+        prevLastDay - x + 1
+      }</div>`;
+    } else {
+      days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
     }
+  }
 
-    for (let i = 1; i <= lastDay; i++) {
-        days += `<div class="day-date">${i}</div>`;
+  //generating days in this month
+  for (let i = 1; i <= lastDay; i++) {
+    var forDate = new Date(
+      renderedDate.getFullYear(),
+      renderedDate.getMonth(),
+      i
+    );
+    forDate.setHours(0, 0, 0, 0);
+    if (forDate >= selectedDate && forDate <= nextWeekDate && hasSelected) {
+      days += `<div class="day-date selected-day">${i}</div>`;
+    } else {
+      days += `<div class="day-date">${i}</div>`;
     }
+  }
 
-    for (let j = 1; j <= nextDays + 1; j++) {
-        days += `<div class="next-date">${j}</div>`;
+  //generating days in next month
+  for (let j = 1; j <= nextDays + 1; j++) {
+    var forDate = new Date(
+      renderedDate.getFullYear(),
+      renderedDate.getMonth() + 1,
+      j
+    );
+    forDate.setHours(0, 0, 0, 0);
+    if (forDate >= selectedDate && forDate <= nextWeekDate && hasSelected) {
+      days += `<div class="next-date selected-day">${j}</div>`;
+    } else {
+      days += `<div class="next-date">${j}</div>`;
     }
-    monthDays.innerHTML = days;
+  }
 
-    var day_dates = document.querySelectorAll(".day-date");
-    day_dates.forEach((day_date) => {
-        day_date.addEventListener("click", () => displayDate(day_date));
-    });
+  monthDays.innerHTML = days;
+
+  // on clicked date
+  var day_dates = document.querySelectorAll(".day-date");
+  day_dates.forEach((day_date) => {
+    day_date.addEventListener("click", () => setInput(day_date));
+  });
 };
 
-function displayDate(day_date) {
-    date.setDate(day_date.textContent);
-    console.log(date.getDate());
+// function that will set the input values to the selected date
+function setInput(day_date) {
+  hasSelected = true;
+
+  selectedDate.setFullYear(renderedDate.getFullYear());
+  selectedDate.setMonth(renderedDate.getMonth());
+  selectedDate.setDate(day_date.textContent);
+
+  var beginDateInput = document.getElementById("begin-date");
+  beginDateInput.setAttribute(
+    "value",
+    selectedDate.getFullYear() +
+      "-" +
+      selectedDate.getMonth() +
+      "-" +
+      selectedDate.getDate()
+  );
+  var endDateInput = document.getElementById("end-date");
+
+  var selectedEndDate = new Date(
+    selectedDate.getFullYear(),
+    selectedDate.getMonth(),
+    selectedDate.getDate() + 6
+  );
+  selectedEndDate.setHours(0, 0, 0, 0);
+
+  endDateInput.setAttribute(
+    "value",
+    selectedEndDate.getFullYear() +
+      "-" +
+      selectedEndDate.getMonth() +
+      "-" +
+      selectedEndDate.getDate()
+  );
+  renderCalendar();
 }
 
 document.querySelector(".prev").addEventListener("click", () => {
-    date.setMonth(date.getMonth() - 1);
-    renderCalendar();
+  renderedDate.setMonth(renderedDate.getMonth() - 1);
+  renderCalendar();
 });
 
 document.querySelector(".next").addEventListener("click", () => {
-    date.setMonth(date.getMonth() + 1);
-    renderCalendar();
+  renderedDate.setMonth(renderedDate.getMonth() + 1);
+  renderCalendar();
 });
 
 renderCalendar();

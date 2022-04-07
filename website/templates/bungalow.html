@@ -10,6 +10,10 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/bungalow.css') }}"
 />
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/calender.css') }}"
+/>
 {% endblock %}
 
 <!--page specific content -->
@@ -38,7 +42,10 @@
       <div class="days"></div>
     </div>
   </div>
-  <form action=""></form>
+  <form action="" method="post">
+    {{form.begin_date(id="begin-date", hidden='') }}
+    {{form.end_date(id="end-date", hidden='') }} {{form.submit}}
+  </form>
   <img src="{{ url_for('static', filename=bungalow_obj.img_b64)}}" alt="" />
   <p>{{bungalow_obj.uuid}}</p>
   <p>{{bungalow_obj.title}}</p>

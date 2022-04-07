@@ -57,3 +57,9 @@
   margin-left: 73px;
   padding: 10px;
 }
+
+.selected-day {
+  background-color: #167e56;
+  border-radius: 3px;
+  color: white;
+}
