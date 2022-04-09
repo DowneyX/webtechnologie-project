@@ -13,12 +13,17 @@
 
 <div class="content-container">
   {% block content %}
-  <div class="container mx-auto">
+  {%if user.role == 'admin'%}
+  <div class="flex items-center justify-center">
+    <a class=" px-3 py-2 mt-4 text-white bg-green-600 rounded-lg hover:bg-green-900"
+      href="/bungalows/update/{{bungalow_obj.uuid}}">
+      <i class="fa-solid fa-pen-to-square"></i>
+    </a>
+  </div>
+  {% endif %}
 
-
-
+  <div class="container mx-auto mt-12">
     <section class="mb-32 text-gray-800">
-      <h2 class="text-2xl font-bold mb-12 text-center">bungalow page</h2>
       <div class="flex flex-wrap mb-6 bg-white rounded-lg px-4 py-4">
         <div class="grow-0 shrink-0 basis-auto w-full lg:w-6/12 lg:pr-6 mb-6 lg:mb-0">
           <div class="relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg"
@@ -42,7 +47,17 @@
       <div class="flex flex-wrap lg:flex-row-reverse mb-12">
         <div class="grow-0 shrink-0 basis-auto w-full lg:w-6/12 lg:pl-6 mb-6 lg:mb-0">
           <div class="" style="background-position: 50%" data-mdb-ripple="true" data-mdb-ripple-color="light">
+            <div class="">
+              <form class='mx-auto' action="" method="post">
+                {{form.start_date(id="begin-date", hidden='') }}
+                {{form.end_date(id="end-date", hidden='') }}
+
+                {{form.submit(class="px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-900 mb-4 w-full")}}
+              </form>
+            </div>
+
             <div class="calender mx-auto">
+
               <div class="month">
                 <i class="fas fa-angle-left prev"></i>
                 <div class="date">
@@ -62,14 +77,7 @@
               </div>
               <div class="days"></div>
             </div>
-            <form class='mx-auto' action="" method="post">
-              {{form.start_date(id="begin-date", hidden='') }}
-              {{form.end_date(id="end-date", hidden='') }}
-
-              {{form.submit(class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900")}}
-            </form>
           </div>
-
         </div>
 
         <div class="grow-0 shrink-0 basis-auto w-full lg:w-6/12 lg:pr-6 bg-white rounded-lg px-4 py-2">

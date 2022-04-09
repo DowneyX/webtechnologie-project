@@ -11,24 +11,28 @@
 				<ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
 					<li class="mr-3">
 						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
-							href="/bungalows/create">maak bungalow</a>
+							href="#">Contact</a>
 					</li>
+
 					<li class="mr-3">
 						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
 							href="/bungalows">Bungalows</a>
 					</li>
+					{% if user.first_name%}
 					<li class="mr-3">
 						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
-							href="#">reserveringen</a>
-					</li>
-					<li class="mr-3">
-						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
-							href="#">Contact</a>
+							href="/reservations">reserveringen</a>
 					</li>
 					<li class="mr-3">
 						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
 							href="/account">Account</a>
 					</li>
+					{%else %}
+					<li class="mr-3">
+						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
+							href="/auth/login">login</a>
+					</li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>

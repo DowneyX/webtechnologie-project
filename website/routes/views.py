@@ -11,7 +11,7 @@ views = Blueprint('views', __name__)
 @views.route('/')
 def home():
     bungalows_obj = Bungalow().query.all()
-    return render_template('bungalows.html', bungalows_obj = bungalows_obj)
+    return render_template('bungalows.html', bungalows_obj = bungalows_obj , user = current_user)
 
 
 @views.route("bungalows/bungalow/<int:bungalow_id>", methods = ['GET', 'POST'])
@@ -34,8 +34,9 @@ def bungalow(bungalow_id):
         # db.session.commit()
         # return redirect(url_for('<url>'))
 
-    return render_template('bungalow.html', bungalow_obj = bungalow_obj, form = form)
+    return render_template('bungalow.html', bungalow_obj = bungalow_obj, form = form , user = current_user)
 
+@login_required
 @views.route("/bungalows/create", methods = ['GET', 'POST'])
 def create_bungalow():
     form = Create_bungalow_form()
@@ -55,9 +56,9 @@ def create_bungalow():
 
         return redirect(url_for('views.bungalow',bungalow_id = bungalow_obj.uuid ))
 
-    return render_template('bungalow_create.html', form = form)
+    return render_template('bungalow_create.html', form = form , user = current_user)
 
-
+@login_required
 @views.route("/bungalows/update/<int:bungalow_id>", methods = ['GET', 'POST'])
 def update_bungalow(bungalow_id):
     form = Create_bungalow_form()
@@ -75,17 +76,21 @@ def update_bungalow(bungalow_id):
         #add to database
         db.session.add(bungalow_obj)
         db.session.commit()
-        return redirect(url_for('views.bungalow',bungalow_id = bungalow_obj.uuid ))
+        return redirect(url_for('views.bungalow',bungalow_id = bungalow_obj.uuid, user = current_user ))
 
     form.title.data = bungalow_obj.title
     form.description.data = bungalow_obj.description
     form.price.data = bungalow_obj.price
     form.max_p.data = bungalow_obj.max_p
 
-    return render_template('bungalow_update.html', form = form)
+    return render_template('bungalow_update.html', form = form, user = current_user)
 
-
-@views.route('/account')
 @login_required
+@views.route('/account')
 def account():
-    return render_template('account_overview.html', user = current_user)
+    return render_template('account.html', user = current_user)
+
+@login_required
+@views.route('/reservations')
+def reservations():
+    return render_template('reservations.html', user = current_user)

@@ -1,7 +1,7 @@
 # auth.py
 from flask import Blueprint, render_template, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user, login_required, login_manager
+from flask_login import login_user, logout_user, login_required
 from ..forms import Create_user_form, Login_user_form
 from ..models import User
 from .. import db
@@ -11,7 +11,6 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login',methods=['GET','POST'])
 def login():
     form = Login_user_form()
-
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
 
@@ -21,9 +20,9 @@ def login():
             flash('Please check your login details and try again.')
             return redirect(url_for('auth.login'))  # if user doesn't exist or password is wrong, reload the page
 
-        # if the above check passes, then we know the user has the right credentials
-        login_user(user, remember = form.remember.data)
+        # # if the above check passes, then we know the user has the right credentials
 
+        login_user(user)
         return redirect(url_for('views.home'))
 
     return render_template('auth/login.html',form = form)
@@ -35,13 +34,13 @@ def signup():
     if form.validate_on_submit():
         user_exists = User.query.filter_by(email=form.email.data).first()
 
-        # if user_exists:
-        #     flash('Email address already exists')
-        #     return redirect(url_for('auth.signup'))
+        if user_exists:
+            flash('Email address already exists')
+            return redirect(url_for('auth.signup'))
 
-        # if form.password1.data != form.password2.data:
-        #     flash('passwords do not match')
-        #     return redirect(url_for('auth.signup'))
+        if form.password1.data != form.password2.data:
+            flash('passwords do not match')
+            return redirect(url_for('auth.signup'))
 
         new_user = User()
         new_user.first_name = form.first_name.data

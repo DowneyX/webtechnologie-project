@@ -1,0 +1,63 @@
+<!--inherits from this base -->
+{% extends "bases/base.html" %}
+
+<!--page specific title -->
+{% block title %} account {% endblock %}
+
+<!--page specific css -->
+{% block stylesheet %} {% endblock %}
+
+<!--page specific content -->
+<div class="content-container">
+  {% block content %}
+
+  <div class="flex items-center justify-center ">
+    <div class="px-8 py-6 mx-4 mt-4 text-left bg-white rounded-md shadow-lg md:w-1/4 lg:w-1/4 sm:w-1/4">
+      <h3 class="text-2xl font-bold text-center">account information</h3>
+
+      <div class="mt-4">
+        <h5 class="font-bold">Created at:</h5>
+        <p>{{user.created_at }}</p>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="font-bold">updated at:</h5>
+        <p>{{user.updated_at}}</p>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="font-bold">User id:</h5>
+        <p>{{user.uuid}}</p>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="font-bold">Role:</h5>
+        <p>{{user.role}}</p>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="font-bold">First name:</h5>
+        <p>{{user.first_name}}</p>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="font-bold">Last name:</h5>
+        <p>{{user.last_name}}</p>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="font-bold">E-mail:</h5>
+        <p>{{user.email}}</p>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="font-bold">Phone number:</h5>
+        <p>{{user.phone_nr}}</p>
+      </div>
+
+
+    </div>
+  </div>
+
+  {% endblock %}
+</div>
