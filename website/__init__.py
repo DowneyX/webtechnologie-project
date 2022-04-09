@@ -6,7 +6,7 @@ DB_NAME = 'database.db'
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='templates')
     upload_folder = 'static/uploads'
 
     # WHEN IN PRODUCTION NEVER SHARE THIS KEY AND CHANGE IT TO SOMETHING THAT MAKES MORE SENSE
@@ -20,8 +20,6 @@ def create_app():
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/auth')
-
-    from .models import User, Bungalow, Reservation
 
     db.create_all(app=app)
 

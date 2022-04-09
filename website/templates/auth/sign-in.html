@@ -1,14 +1,11 @@
-{% extends "bases/base-no-navbar.html" %}
+{% extends "bases/base.html" %}
 
 <!--page specific title -->
-{% block title %} sign-in {% endblock %}
+{% block title %} Login {% endblock %}
 
 <!--page specific css -->
 {%block stylesheet %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/sign-in.css') }}"
-/>
+
 {% endblock %}
 
 <!--page specific content -->
