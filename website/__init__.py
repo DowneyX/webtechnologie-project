@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
@@ -8,6 +9,9 @@ DB_NAME = 'database.db'
 def create_app():
     app = Flask(__name__, template_folder='templates')
     upload_folder = 'static/uploads'
+
+    login_manager = LoginManager()
+    login_manager.init_app(app)
 
     # WHEN IN PRODUCTION NEVER SHARE THIS KEY AND CHANGE IT TO SOMETHING THAT MAKES MORE SENSE
     app.config['SECRET_KEY'] = 'ThisIsSecret'
@@ -22,5 +26,11 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/auth')
 
     db.create_all(app=app)
+
+    from .models import User
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
 
     return app

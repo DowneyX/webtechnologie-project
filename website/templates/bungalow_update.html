@@ -6,10 +6,7 @@
 
 <!--page specific css -->
 {% block stylesheet %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/bungalow_create.css') }}"
-/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bungalow_create.css') }}" />
 {% endblock %}
 
 <!--page specific content -->
@@ -17,7 +14,7 @@
   {% block content %}
   <div class="form-container-parent">
     <div class="form-container">
-      <h2>Update bungalow</h2>
+      <h2>update bungalow</h2>
       <form action="" method="post">
         {{ form.hidden_tag() }}
         <div class="field-container">{{ form.title.label }} {{form.title}}</div>
@@ -30,9 +27,7 @@
 
         <div class="radio-container">{{ form.max_p.label }} {{form.max_p}}</div>
 
-        <div>
-          <button class="button" type="submit">Update</button>
-        </div>
+        <div>{{ form.submit(class="button") }}</div>
       </form>
     </div>
   </div>

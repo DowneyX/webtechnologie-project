@@ -1,0 +1,45 @@
+{% extends "bases/base-no-navbar.html" %}
+
+<!--page specific title -->
+{% block title %} Login {% endblock %}
+
+<!--page specific css -->
+{%block stylesheet %}
+
+{% endblock %}
+
+<!--page specific content -->
+{% block content %}
+
+<div class="sign-in-container-parent">
+  <div class="sign-in-container">
+    <a class="normalize-link" href="/">
+      <i class="fa-solid fa-xmark"></i>
+    </a>
+    <h2>Sign in</h2>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="">
+        <div class="field-container">
+          {{ form.email.label }} {{form.email}}
+        </div>
+
+        <div class="field-container">
+          {{ form.password.label }} {{form.password}}
+        </div>
+
+        <div class="field-container">
+          {{ form.remember.label }} {{form.remember}}
+        </div>
+
+        <div class="field-container">
+          {{ form.submit }}
+        </div>
+
+        <div>
+          <a href="/auth/signup"><button class="button" type="button">sign-up</button></a>
+        </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

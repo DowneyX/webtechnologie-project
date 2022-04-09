@@ -3,3 +3,4 @@ flask_sqlalchemy==2.5.1
 Werkzeug~=2.1.1
 flask_wtf
 wtforms
+flask_migrate

@@ -1,14 +1,10 @@
-from datetime import datetime, date
-import imp
-from posixpath import split
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, redirect, render_template, url_for
+from flask_login import current_user, login_required
 from ..forms import Create_bungalow_form, Create_Reservation_form
 from ..models import Bungalow, Reservation
 from .. import db
-import sys
 
 views = Blueprint('views', __name__)
-
 
 @views.route('/bungalows')
 @views.route('/')
@@ -27,10 +23,9 @@ def bungalow(bungalow_id):
         reservation_obj = Reservation()
         reservation_obj.bungalow = bungalow_obj.uuid
         reservation_obj.user = None
-        reservation_obj.begin_date = form.begin_date
+        reservation_obj.start_date = form.start_date
         reservation_obj.end_date = form.end_date
-        reservation_obj.created_at = datetime.now()
-        reservation_obj.updated_at = datetime.now()
+        reservation_obj.total = bungalow_obj.price
 
         # add to database 
 
@@ -52,12 +47,11 @@ def create_bungalow():
         bungalow_obj.price = form.price.data
         bungalow_obj.max_p = form.max_p.data
         bungalow_obj.img_b64 = 'uploads/bungalow_id_1.jpg'
-        bungalow_obj.created_at = datetime.now()
-        bungalow_obj.updated_at = datetime.now()
 
         # add to database 
         db.session.add(bungalow_obj)
         db.session.commit()
+
         return redirect(url_for('views.bungalow',bungalow_id = bungalow_obj.uuid ))
 
     return render_template('bungalow_create.html', form = form)
@@ -70,12 +64,13 @@ def update_bungalow(bungalow_id):
 
     #form submitted
     if form.validate_on_submit():
-        bungalow_obj.title = form.title.data
-        bungalow_obj.description = form.description.data
-        bungalow_obj.price = form.price.data
-        bungalow_obj.max_p = form.max_p.data
-        bungalow_obj.img_b64 = 'uploads/bungalow_id_1.jpg'
-        bungalow_obj.updated_at = datetime.now()
+        title = form.title.data
+        description = form.description.data
+        price = form.price.data
+        max_p = form.max_p.data
+        img_b64 = 'uploads/bungalow_id_1.jpg'
+
+        bungalow_obj = Bungalow(title, description, max_p, img_b64, price)
 
         #add to database
         db.session.add(bungalow_obj)
@@ -88,3 +83,9 @@ def update_bungalow(bungalow_id):
     form.max_p.data = bungalow_obj.max_p
 
     return render_template('bungalow_update.html', form = form)
+
+
+@views.route('/account')
+@login_required
+def account():
+    return render_template('account_overview.html', user = current_user)

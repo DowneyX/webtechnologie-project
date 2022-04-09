@@ -1,0 +1,52 @@
+{% extends "bases/base-no-navbar.html" %}
+
+<!--page specific title -->
+{% block title %} Register {% endblock %}
+
+<!--page specific css -->
+{%block stylesheet %}
+
+{% endblock %}
+
+<!--page specific content -->
+{% block content %}
+
+<div class="sign-up-container-parent">
+  <div class="sign-up-container">
+    <a class="normalize-link" href="/">
+      <i class="fa-solid fa-xmark"></i>
+    </a>
+
+    <h2>Sign up</h2>
+    <form method="post">
+      <div class="">
+        {{ form.hidden_tag() }}
+
+        <div class="field-container">
+          {{ form.first_name.label }} {{form.first_name}}
+        </div>
+
+        <div class="field-container">
+          {{ form.last_name.label }} {{form.last_name}}
+        </div>
+        <div class="field-container">
+          {{ form.email.label }} {{form.email}}
+        </div>
+
+        <div class="field-container">
+          {{ form.phone_nr.label }} {{form.phone_nr}}
+        </div>
+
+        <div class="field-container">
+          {{ form.password1.label }} {{form.password1}}
+        </div>
+
+        <div class="field-container">
+          {{ form.password2.label }} {{form.password2}}
+        </div>
+
+        <div>{{ form.submit(class="button") }}</div>
+    </form>
+  </div>
+</div>
+{% endblock %}

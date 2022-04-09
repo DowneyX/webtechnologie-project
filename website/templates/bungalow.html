@@ -5,9 +5,7 @@
 {% block title %} bungalow: {{bungalow_obj.name}} {% endblock %}
 
 <!--page specific css -->
-{% block stylesheet %}
-
-{% endblock %}
+{% block stylesheet %} {% endblock %}
 
 <!--page specific content -->
 <div class="content-container">
@@ -36,7 +34,7 @@
     </div>
   </div>
   <form action="" method="post">
-    {{form.begin_date(id="begin-date", hidden='') }}
+    {{form.start_date(id="begin-date", hidden='') }}
     {{form.end_date(id="end-date", hidden='') }} {{form.submit}}
   </form>
   <img src="{{ url_for('static', filename=bungalow_obj.img_b64)}}" alt="" />
