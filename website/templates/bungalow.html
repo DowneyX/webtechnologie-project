@@ -49,6 +49,7 @@
           <div class="" style="background-position: 50%" data-mdb-ripple="true" data-mdb-ripple-color="light">
             <div class="">
               <form class='mx-auto' action="" method="post">
+                {{form.hidden_tag()}}
                 {{form.start_date(id="begin-date", hidden='') }}
                 {{form.end_date(id="end-date", hidden='') }}
 

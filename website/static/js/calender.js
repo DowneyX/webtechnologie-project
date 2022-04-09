@@ -125,14 +125,7 @@ function setInput(day_date) {
   selectedDate.setDate(day_date.textContent);
 
   var beginDateInput = document.getElementById("begin-date");
-  beginDateInput.setAttribute(
-    "value",
-    selectedDate.getFullYear() +
-      "-" +
-      selectedDate.getMonth() +
-      "-" +
-      selectedDate.getDate()
-  );
+  beginDateInput.value = selectedDate.toISOString().substring(0, 10)
   var endDateInput = document.getElementById("end-date");
 
   var selectedEndDate = new Date(
@@ -142,14 +135,7 @@ function setInput(day_date) {
   );
   selectedEndDate.setHours(0, 0, 0, 0);
 
-  endDateInput.setAttribute(
-    "value",
-    selectedEndDate.getFullYear() +
-      "-" +
-      selectedEndDate.getMonth() +
-      "-" +
-      selectedEndDate.getDate()
-  );
+  endDateInput.value = selectedEndDate.toISOString().substring(0, 10)
   renderCalendar();
 }
 

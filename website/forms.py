@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import (StringField, BooleanField, FloatField,
                                   RadioField, SelectField,
-                                  TextAreaField, SubmitField)
+                                  TextAreaField, SubmitField,DateField)
 from wtforms.validators import DataRequired 
 
 class Create_bungalow_form(FlaskForm):
@@ -12,8 +12,8 @@ class Create_bungalow_form(FlaskForm):
     submit = SubmitField("Submit")
     
 class Create_Reservation_form(FlaskForm):
-    start_date = StringField("Start date", validators=[DataRequired()])
-    end_date = StringField("End date", validators=[DataRequired()])
+    start_date = DateField("Start date", validators=[DataRequired()])
+    end_date = DateField("End date", validators=[DataRequired()])
     submit = SubmitField("Submit") 
 
 class Create_user_form(FlaskForm):
