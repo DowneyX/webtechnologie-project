@@ -6,31 +6,41 @@
 
 <!--page specific css -->
 {% block stylesheet %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/bungalow_create.css') }}"
-/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bungalow_create.css') }}" />
 {% endblock %}
 
 <!--page specific content -->
 <div class="content-container">
   {% block content %}
-  <div class="form-container-parent">
-    <div class="form-container">
-      <h2>create bungalow</h2>
-      <form action="" method="post">
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="px-8 py-6 mx-4 mt-4 text-left bg-white rounded-md shadow-lg md:w-1/3 lg:w-1/3 sm:w-1/3">
+      <h3 class="text-2xl font-bold text-center">create bungalow</h3>
+      <form method="post">
         {{ form.hidden_tag() }}
-        <div class="field-container">{{ form.title.label }} {{form.title}}</div>
+        <div class="mt-4">
+          <div>
+            {{ form.title.label }}
 
-        <div class="field-container">
-          {{ form.description.label }} {{form.description}}
+            {{form.title(class='w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1
+            focus:ring-blue-600')}}
+
+            {{ form.description.label() }}
+            {{form.description(class='w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1
+            focus:ring-blue-600')}}
+
+            {{ form.price.label() }}
+            {{form.price(class='w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1
+            focus:ring-blue-600')}}
+
+            {{ form.max_p.label() }}
+            {{form.max_p(class='w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1
+            focus:ring-blue-600')}}
+          </div>
+          <span class="text-xs text-red-400">Password must be same!</span>
+          <div class="flex">
+            {{form.submit(class="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900")}}
+          </div>
         </div>
-
-        <div class="field-container">{{ form.price.label }} {{form.price}}</div>
-
-        <div class="radio-container">{{ form.max_p.label }} {{form.max_p}}</div>
-
-        <div>{{ form.submit(class="button") }}</div>
       </form>
     </div>
   </div>

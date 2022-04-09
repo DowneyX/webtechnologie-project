@@ -34,7 +34,10 @@
               </p>
             </a>
             <a class="text-gray-400 text-xs mt-2 hover:text-gray-100" href="#">
-              {{bungalow.description}}
+              {% with price = "{:.2f}".format(bungalow.price) %}
+              $ {{price}}
+              {% endwith%}
+
             </a>
           </div>
         </div>

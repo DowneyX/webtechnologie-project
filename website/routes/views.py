@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, redirect, render_template, url_for
 from flask_login import current_user, login_required
 from ..forms import Create_bungalow_form, Create_Reservation_form
@@ -64,13 +65,12 @@ def update_bungalow(bungalow_id):
 
     #form submitted
     if form.validate_on_submit():
-        title = form.title.data
-        description = form.description.data
-        price = form.price.data
-        max_p = form.max_p.data
-        img_b64 = 'uploads/bungalow_id_1.jpg'
-
-        bungalow_obj = Bungalow(title, description, max_p, img_b64, price)
+        bungalow_obj.title = form.title.data
+        bungalow_obj.description = form.description.data
+        bungalow_obj.price = form.price.data
+        bungalow_obj.max_p = form.max_p.data
+        bungalow_obj.img_b64 = 'uploads/bungalow_id_1.jpg'
+        bungalow_obj.updated_at = datetime.now()
 
         #add to database
         db.session.add(bungalow_obj)

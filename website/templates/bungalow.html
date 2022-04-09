@@ -5,45 +5,93 @@
 {% block title %} bungalow: {{bungalow_obj.name}} {% endblock %}
 
 <!--page specific css -->
-{% block stylesheet %} {% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/calender.css') }}">
+{% endblock %}
 
 <!--page specific content -->
+
 <div class="content-container">
   {% block content %}
+  <div class="container mx-auto">
 
-  <div class="container">
-    <div class="calender">
-      <div class="month">
-        <i class="fas fa-angle-left prev"></i>
-        <div class="date">
-          <h1></h1>
-          <p></p>
+
+
+    <section class="mb-32 text-gray-800">
+      <h2 class="text-2xl font-bold mb-12 text-center">bungalow page</h2>
+      <div class="flex flex-wrap mb-6 bg-white rounded-lg px-4 py-4">
+        <div class="grow-0 shrink-0 basis-auto w-full lg:w-6/12 lg:pr-6 mb-6 lg:mb-0">
+          <div class="relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg"
+            style="background-position: 50%" data-mdb-ripple="true" data-mdb-ripple-color="light">
+            <img src="{{ url_for('static', filename=bungalow_obj.img_b64)}}" class="w-full" alt="Louvre" />
+            <a href="#!">
+              <div
+                class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"
+                style="background-color: rgba(251, 251, 251, 0.2)"></div>
+            </a>
+          </div>
         </div>
-        <i class="fas fa-angle-right next"></i>
+        <div class="grow-0 shrink-0 basis-auto w-full lg:w-6/12 lg:pl-6">
+          <h3 class="text-2xl font-bold mb-4">{{bungalow_obj.title}}</h3>
+          <p class="text-gray-500 mb-6">
+            {{bungalow_obj.description}}
+          </p>
+        </div>
       </div>
-      <div class="weekdays">
-        <div>Mon</div>
-        <div>Tue</div>
-        <div>Wed</div>
-        <div>Thu</div>
-        <div>Fri</div>
-        <div>Sat</div>
-        <div>Sun</div>
-      </div>
-      <div class="days"></div>
-    </div>
-  </div>
-  <form action="" method="post">
-    {{form.start_date(id="begin-date", hidden='') }}
-    {{form.end_date(id="end-date", hidden='') }} {{form.submit}}
-  </form>
-  <img src="{{ url_for('static', filename=bungalow_obj.img_b64)}}" alt="" />
-  <p>{{bungalow_obj.uuid}}</p>
-  <p>{{bungalow_obj.title}}</p>
-  <p>{{bungalow_obj.description}}</p>
-  <p>{{bungalow_obj.price}}</p>
-  <p>{{bungalow_obj.max_p}}</p>
 
-  <script src="{{ url_for('static', filename='js/calender.js') }}"></script>
+      <div class="flex flex-wrap lg:flex-row-reverse mb-12">
+        <div class="grow-0 shrink-0 basis-auto w-full lg:w-6/12 lg:pl-6 mb-6 lg:mb-0">
+          <div class="" style="background-position: 50%" data-mdb-ripple="true" data-mdb-ripple-color="light">
+            <div class="calender mx-auto">
+              <div class="month">
+                <i class="fas fa-angle-left prev"></i>
+                <div class="date">
+                  <h1></h1>
+                  <p></p>
+                </div>
+                <i class="fas fa-angle-right next"></i>
+              </div>
+              <div class="weekdays">
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+                <div>Sun</div>
+              </div>
+              <div class="days"></div>
+            </div>
+            <form class='mx-auto' action="" method="post">
+              {{form.start_date(id="begin-date", hidden='') }}
+              {{form.end_date(id="end-date", hidden='') }}
+
+              {{form.submit(class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900")}}
+            </form>
+          </div>
+
+        </div>
+
+        <div class="grow-0 shrink-0 basis-auto w-full lg:w-6/12 lg:pr-6 bg-white rounded-lg px-4 py-2">
+          <h3 class="text-2xl font-bold mb-4">detials</h3>
+          <p class="text-gray-500">
+            name: {{bungalow_obj.title}}
+          </p>
+
+          <p class="text-gray-500">
+            price per week:
+            {% with price = "{:.2f}".format(bungalow_obj.price) %}
+            $ {{price}}
+            {% endwith%}</p>
+
+          <p class="text-gray-500">
+            number of people: {{bungalow_obj.min_p}} - {{bungalow_obj.max_p}}
+          </p>
+
+        </div>
+      </div>
+
+      <script src="{{ url_for('static', filename='js/calender.js') }}"></script>
+  </div>
   {% endblock %}
 </div>
