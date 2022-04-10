@@ -1,5 +1,5 @@
-from datetime import datetime
-from flask import Blueprint, redirect, render_template, url_for
+from datetime import date, datetime
+from flask import Blueprint, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 from psutil import users
 from ..forms import Create_bungalow_form, Create_Reservation_form
@@ -27,7 +27,20 @@ def bungalow(bungalow_id):
     #form submitted
     if form.validate_on_submit():
         if not current_user.is_authenticated:
+            flash("you have to be logged in to make a reservation")
             return redirect(url_for('auth.login'))
+
+        if form.start_date.data < date.today():
+            flash('cannot make reservations on dates that have already passed')
+            return redirect(url_for('views.bungalow', bungalow_id=bungalow_id))
+
+        if db.session.query(Reservation).filter((Reservation.start_date <= form.end_date.data) & (Reservation.start_date >= form.start_date.data) & (Reservation.bungalow == bungalow_id)).first():
+            flash('sorry that week has already been reserved')
+            return redirect(url_for('views.bungalow', bungalow_id=bungalow_id))
+
+        if db.session.query(Reservation).filter((Reservation.end_date <= form.end_date.data) & (Reservation.end_date >= form.start_date.data) & (Reservation.bungalow == bungalow_id)).first():
+            flash('sorry that week has already been reserved')
+            return redirect(url_for('views.bungalow', bungalow_id=bungalow_id))
 
         reservation_obj = Reservation()
         reservation_obj.bungalow = bungalow_obj.uuid

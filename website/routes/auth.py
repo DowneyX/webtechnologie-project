@@ -23,6 +23,8 @@ def login():
         # # if the above check passes, then we know the user has the right credentials
 
         login_user(user)
+
+        flash("login succesfull")
         return redirect(url_for('views.home'))
 
     return render_template('auth/login.html',form = form)
@@ -59,5 +61,7 @@ def signup():
 @auth.route('/logout')
 @login_required
 def logout():
+
+    flash("user logged out")
     logout_user()
     return redirect(url_for('views.home'))

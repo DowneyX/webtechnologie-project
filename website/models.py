@@ -44,3 +44,4 @@ class Reservation(db.Model):
     created_at = db.Column(db.Date(), nullable=False, default=datetime.now())
     updated_at = db.Column(db.Date(), nullable=True)
     deleted_at = db.Column(db.Date(), nullable=True)
+

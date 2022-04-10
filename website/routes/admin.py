@@ -1,9 +1,7 @@
-from flask import Blueprint, redirect, render_template, url_for
+from flask import Blueprint, flash, redirect, render_template, url_for
 import datetime
 from flask_login import current_user, login_required
-
-from website.routes.views import bungalow, reservations
-from ..forms import Create_bungalow_form, Create_Reservation_form
+from ..forms import Create_bungalow_form
 from ..models import Bungalow, Reservation, User
 from .. import db
 
@@ -13,6 +11,7 @@ admin = Blueprint('admin', __name__)
 @admin.route("/")
 def admin_dashboard():
     if current_user.role != 'admin':
+        flash("only admin accounts can acces this page")
         return redirect(url_for('views.home'))
 
     return render_template('admin/admin.html', user = current_user)
@@ -21,6 +20,7 @@ def admin_dashboard():
 @admin.route("bungalowoverview")
 def overview_bungalows():
     if current_user.role != 'admin':
+        flash("only admin accounts can acces this page")
         return redirect(url_for('views.home'))
 
     bungalows_obj = Bungalow().query.all()
@@ -31,6 +31,7 @@ def overview_bungalows():
 @admin.route("useroverview")
 def overview_users():
     if current_user.role != 'admin':
+        flash("only admin accounts can acces this page")
         return redirect(url_for('views.home'))
 
     users_obj = User().query.all()
@@ -41,6 +42,7 @@ def overview_users():
 @admin.route("reservationoverview")
 def overview_reservations():
     if current_user.role != 'admin':
+        flash("only admin accounts can acces this page")
         return redirect(url_for('views.home'))
 
     reservations_obj = Reservation().query.all()
@@ -51,6 +53,7 @@ def overview_reservations():
 @admin.route("bungalowcreate", methods = ['GET', 'POST'])
 def create_bungalow():
     if current_user.role != 'admin':
+        flash("only admin accounts can acces this page")
         return redirect(url_for('views.home'))
     
     form = Create_bungalow_form()
@@ -68,6 +71,7 @@ def create_bungalow():
         db.session.add(bungalow_obj)
         db.session.commit()
 
+        flash("bungalow has been successfully added")
         return redirect(url_for('views.bungalow',bungalow_id = bungalow_obj.uuid ))
 
     return render_template('admin/bungalow_create.html', form = form , user = current_user)
@@ -77,6 +81,7 @@ def create_bungalow():
 def update_bungalow(bungalow_id):
 
     if current_user.role != 'admin':
+        flash("only admin accounts can acces this page")
         return redirect(url_for('views.home'))
 
     form = Create_bungalow_form()
@@ -94,6 +99,8 @@ def update_bungalow(bungalow_id):
         #add to database
         db.session.add(bungalow_obj)
         db.session.commit()
+
+        flash("bungalow has been successfully updated")
         return redirect(url_for('views.bungalow',bungalow_id = bungalow_obj.uuid, user = current_user ))
 
     form.title.data = bungalow_obj.title
