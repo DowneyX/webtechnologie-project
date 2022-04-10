@@ -1,0 +1,17 @@
+<!--inherits from this base -->
+{% extends "bases/base.html" %}
+
+<!--page specific title -->
+{% block title %} account {% endblock %}
+
+<!--page specific css -->
+{% block stylesheet %} {% endblock %}
+
+<!--page specific content -->
+
+<div class="content-container">
+  {% block content %}
+  {% include 'includes/admin_header.html' %}
+
+  {% endblock %}
+</div>

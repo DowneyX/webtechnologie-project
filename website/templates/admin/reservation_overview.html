@@ -1,0 +1,126 @@
+<!--inherits from this base -->
+{% extends "bases/base.html" %}
+
+<!--page specific title -->
+{% block title %} account {% endblock %}
+
+<!--page specific css -->
+{% block stylesheet %} {% endblock %}
+
+<!--page specific content -->
+<div class="content-container">
+    {% block content %}
+    {% include 'includes/admin_header.html' %}
+
+    <div class="container mx-auto">
+        <section class="relative py-16 bg-blueGray-50">
+            <div class="w-full mb-12 px-4">
+                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded 
+  bg-white text-black">
+                    <div class="rounded-t mb-0 px-2 py-3 border-0">
+                        <div class="flex flex-wrap items-center">
+                            <div class=" relative w-full px-4 max-w-full flex-grow flex-1 ">
+                                <h3 class="font-semibold text-lg text-black">bungalows</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block w-full overflow-x-auto ">
+                        <table class="items-center w-full bg-transparent border-collapse">
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
+                                        ID</th>
+                                    <th
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
+                                        Bungalow</th>
+                                    <th
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
+                                        User</th>
+                                    <th
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
+                                        Start date</th>
+                                    <th
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
+                                        End date</th>
+                                    <th
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
+                                        created_at</th>
+                                    <th
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
+                                        updated_at</th>
+                                    <th
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
+                                        deleted_at </th>
+                                    <th
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
+                                        options</th>
+                                </tr>
+                            </thead>
+
+                            {% for reservation_obj in reservations_obj %}
+                            <tbody>
+                                <tr>
+                                    <th
+                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        {{reservation_obj.uuid}}
+                                    </th>
+                                    <td
+                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        {{reservation_obj.bungalow}}
+                                    </td>
+                                    <td
+                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        {{reservation_obj.user}}
+                                    </td>
+
+                                    <td
+                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        {{reservation_obj.start_date}}
+                                    </td>
+
+                                    <td
+                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        {{reservation_obj.end_date}}
+                                    </td>
+
+                                    <td
+                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        {{reservation_obj.created_at}}
+                                    </td>
+
+                                    <td
+                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        {{reservation_obj.updated_at}}
+                                    </td>
+
+                                    <td
+                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        {{reservation_obj.deleted_at}}
+                                    </td>
+
+                                    <td
+                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        <a href="#">
+                                            <span
+                                                class="inline px-3 py-2 rounded-lg hover:bg-green-900 shadow-lg bg-green-600"><i
+                                                    class="fa-solid fa-pen-to-square"></i></span>
+                                        </a>
+                                        <a href="#">
+                                            <span
+                                                class="inline px-3 py-2 rounded-lg hover:bg-red-900 shadow-lg bg-red-600"><i
+                                                    class="fa-solid fa-trash"></i></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    {% endblock %}
+</div>

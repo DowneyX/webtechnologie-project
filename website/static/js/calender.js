@@ -120,23 +120,35 @@ const renderCalendar = () => {
 function setInput(day_date) {
   hasSelected = true;
 
+  selectedDate.setHours(12, 0, 0, 0);
+  
+
   selectedDate.setFullYear(renderedDate.getFullYear());
   selectedDate.setMonth(renderedDate.getMonth());
   selectedDate.setDate(day_date.textContent);
 
+  
   var beginDateInput = document.getElementById("begin-date");
   beginDateInput.value = selectedDate.toISOString().substring(0, 10)
-  var endDateInput = document.getElementById("end-date");
 
   var selectedEndDate = new Date(
     selectedDate.getFullYear(),
     selectedDate.getMonth(),
     selectedDate.getDate() + 6
   );
-  selectedEndDate.setHours(0, 0, 0, 0);
 
+  selectedEndDate.setHours(12, 0, 0, 0);
+
+  var endDateInput = document.getElementById("end-date");
   endDateInput.value = selectedEndDate.toISOString().substring(0, 10)
   renderCalendar();
+
+  console.log(selectedDate)
+  console.log(selectedEndDate)
+
+  console.log(beginDateInput.value)
+  console.log(endDateInput.value)
+
 }
 
 document.querySelector(".prev").addEventListener("click", () => {

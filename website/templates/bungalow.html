@@ -13,15 +13,6 @@
 
 <div class="content-container">
   {% block content %}
-  {%if user.role == 'admin'%}
-  <div class="flex items-center justify-center">
-    <a class=" px-3 py-2 mt-4 text-white bg-green-600 rounded-lg hover:bg-green-900"
-      href="/bungalows/update/{{bungalow_obj.uuid}}">
-      <i class="fa-solid fa-pen-to-square"></i>
-    </a>
-  </div>
-  {% endif %}
-
   <div class="container mx-auto mt-12">
     <section class="mb-32 text-gray-800">
       <div class="flex flex-wrap mb-6 bg-white rounded-lg px-4 py-4">
