@@ -1,9 +1,8 @@
-from datetime import date, datetime
+from datetime import date
 from flask import Blueprint, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
-from psutil import users
-from ..forms import Create_bungalow_form, Create_Reservation_form
-from ..models import Bungalow, Reservation, User
+from ..forms import Create_Reservation_form
+from ..models import Bungalow, Reservation
 from .. import db
 
 views = Blueprint('views', __name__)
