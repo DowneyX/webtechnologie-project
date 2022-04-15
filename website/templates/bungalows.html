@@ -11,33 +11,32 @@
 {% block content %}
 <div class="flex items-center justify-center mt-12">
   <div class="grid grid-cols-12 gap-2 gap-y-4 max-w-6xl">
-    {% for bungalow in bungalows_obj %}
+    {% for bungalow_obj in bungalows_obj %}
     <div class="col-span-12 sm:col-span-6 md:col-span-3">
       <card class="w-full flex flex-col">
         <div class="relative">
-          <a href="bungalows/bungalow/{{bungalow.uuid}}">
-            <img src="{{ url_for('static', filename=bungalow.img_b64)}}" class="w-96 h-50" />
+          <a href="{{ url_for('views.bungalow', bungalow_id = bungalow_obj.uuid)}}">
+            <img src="{{ url_for('static', filename=bungalow_obj.img_b64)}}" class="w-96 h-50" />
           </a>
           <p class="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py">
-            👨🏻‍🦳 {{bungalow.min_p}}-{{bungalow.max_p}}
+            👨🏻‍🦳 {{bungalow_obj.min_p}}-{{bungalow_obj.max_p}}
           </p>
           <p class="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py">
-            👨🏻‍🦳 {{bungalow.min_p}}-{{bungalow.max_p}}
+            👨🏻‍🦳 {{bungalow_obj.min_p}}-{{bungalow_obj.max_p}}
           </p>
         </div>
 
         <div class="flex flex-row mt-2 gap-2">
           <div clas="flex flex-col">
-            <a href="bungalows/bungalow/{{bungalow.uuid}}">
+            <a href="{{ url_for('views.bungalow', bungalow_id = bungalow_obj.uuid)}}">
               <p class="text-gray-100 text-sm font-semibold">
-                {{bungalow.title}}
+                {{bungalow_obj.title}}
               </p>
             </a>
             <a class="text-gray-400 text-xs mt-2 hover:text-gray-100" href="#">
-              {% with price = "{:.2f}".format(bungalow.price) %}
+              {% with price = "{:.2f}".format(bungalow_obj.price) %}
               $ {{price}}
               {% endwith%}
-
             </a>
           </div>
         </div>

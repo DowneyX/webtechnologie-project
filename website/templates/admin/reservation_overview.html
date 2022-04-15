@@ -109,12 +109,14 @@
 
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        <a href="#">
+                                        <a
+                                            href="{{url_for('admin.update_reservation', reservation_id = reservation_obj.uuid )}}">
                                             <span
                                                 class="inline px-3 py-2 rounded-lg hover:bg-green-900 shadow-lg bg-green-600"><i
                                                     class="fa-solid fa-pen-to-square"></i></span>
                                         </a>
-                                        <a href="#">
+                                        <a
+                                            href="{{ url_for('admin.delete_reservation', reservation_id = reservation_obj.uuid )}}">
                                             <span
                                                 class="inline px-3 py-2 rounded-lg hover:bg-red-900 shadow-lg bg-red-600"><i
                                                     class="fa-solid fa-trash"></i></span>

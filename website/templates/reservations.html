@@ -45,7 +45,9 @@
                                         total </th>
                                     <th
                                         class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-white text-black border-gray-800">
+                                        options
                                     </th>
+
                                 </tr>
                             </thead>
 
@@ -65,7 +67,7 @@
                                     </td>
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        {{user.email}}
+                                        {{current_user.email}}
                                     </td>
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -78,6 +80,21 @@
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{join[0].total}}
+                                    </td>
+                                    <td
+                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        <a
+                                            href="{{ url_for('views.update_reservation', reservation_id = join[0].uuid)}}">
+                                            <span
+                                                class="inline px-3 py-2 rounded-lg hover:bg-green-900 shadow-lg bg-green-600"><i
+                                                    class="fa-solid fa-pen-to-square"></i></span>
+                                        </a>
+                                        <a
+                                            href="{{ url_for('views.delete_reservation', reservation_id = join[0].uuid)}}">
+                                            <span
+                                                class="inline px-3 py-2 rounded-lg hover:bg-red-900 shadow-lg bg-red-600"><i
+                                                    class="fa-solid fa-trash"></i></span>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>

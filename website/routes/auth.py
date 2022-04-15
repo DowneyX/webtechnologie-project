@@ -1,7 +1,7 @@
 # auth.py
 from flask import Blueprint, render_template, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from ..forms import Create_user_form, Login_user_form
 from ..models import User
 from .. import db
@@ -10,7 +10,13 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login',methods=['GET','POST'])
 def login():
+    if current_user.is_authenticated:
+        flash('you are already loged in')
+        redirect(url_for('views.home'))
+
     form = Login_user_form()
+
+
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
 
@@ -29,8 +35,12 @@ def login():
 
     return render_template('auth/login.html',form = form)
 
-@auth.route('/signup',methods=['GET', 'POST'])
+@auth.route('/sign-up',methods=['GET', 'POST'])
 def signup():
+    if current_user.is_authenticated:
+        flash('you are already loged in')
+        redirect(url_for('views.home'))
+    
     form = Create_user_form()
 
     if form.validate_on_submit():
@@ -38,10 +48,6 @@ def signup():
 
         if user_exists:
             flash('Email address already exists')
-            return redirect(url_for('auth.signup'))
-
-        if form.password1.data != form.password2.data:
-            flash('passwords do not match')
             return redirect(url_for('auth.signup'))
 
         new_user = User()
@@ -53,6 +59,8 @@ def signup():
 
         db.session.add(new_user)
         db.session.commit()
+
+        flash("account succesfully created")
         return redirect(url_for('auth.login'))
 
     return render_template('auth/sign_up.html', form = form)
@@ -65,3 +73,8 @@ def logout():
     flash("user logged out")
     logout_user()
     return redirect(url_for('views.home'))
+
+@login_required
+@auth.route('/account')
+def account():
+    return render_template('account.html', current_user = current_user)

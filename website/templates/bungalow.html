@@ -38,7 +38,7 @@
       <div class="flex flex-wrap lg:flex-row-reverse mb-12">
         <div class="grow-0 shrink-0 basis-auto w-full lg:w-6/12 lg:pl-6 mb-6 lg:mb-0">
           <div class="" style="background-position: 50%" data-mdb-ripple="true" data-mdb-ripple-color="light">
-            <div class="">
+            <div class="width-450px">
               <form class='mx-auto' action="" method="post">
                 {{form.hidden_tag()}}
                 {{form.start_date(id="begin-date", hidden='') }}
@@ -46,28 +46,26 @@
 
                 {{form.submit(class="px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-900 mb-4 w-full")}}
               </form>
-            </div>
-
-            <div class="calender mx-auto">
-
-              <div class="month">
-                <i class="fas fa-angle-left prev"></i>
-                <div class="date">
-                  <h1></h1>
-                  <p></p>
+              <div class="calender rounded-lg mx-auto">
+                <div class="month rounded-t-lg">
+                  <i class="fas fa-angle-left prev"></i>
+                  <div class="date">
+                    <h1></h1>
+                    <p></p>
+                  </div>
+                  <i class="fas fa-angle-right next"></i>
                 </div>
-                <i class="fas fa-angle-right next"></i>
+                <div class="weekdays">
+                  <div>Mon</div>
+                  <div>Tue</div>
+                  <div>Wed</div>
+                  <div>Thu</div>
+                  <div>Fri</div>
+                  <div>Sat</div>
+                  <div>Sun</div>
+                </div>
+                <div class="days"></div>
               </div>
-              <div class="weekdays">
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
-                <div>Sun</div>
-              </div>
-              <div class="days"></div>
             </div>
           </div>
         </div>

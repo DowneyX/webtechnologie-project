@@ -21,7 +21,7 @@
             <div class="flex flex-wrap items-center">
               <div class=" relative w-full px-4 max-w-full flex-grow flex-1 ">
                 <h3 class="inline font-semibold text-lg text-black">Bungalows</h3>
-                <a href="/admin/bungalowcreate">
+                <a href="{{ url_for('admin.create_bungalow')}}">
                   <span
                     class="inline px-3 rounded-lg hover:bg-green-900 shadow-lg py-1 bg-green-600 absolute right-0"><i
                       class="fa-solid fa-plus"></i></span>
@@ -62,45 +62,45 @@
                 </tr>
               </thead>
 
-              {% for bungalow in bungalows_obj %}
+              {% for bungalow_obj in bungalows_obj %}
               <tbody>
                 <tr>
                   <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                    {{bungalow.uuid}}
+                    {{bungalow_obj.uuid}}
                   </th>
                   <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                    <img src="{{ url_for('static', filename=bungalow.img_b64)}}"
+                    <img src="{{ url_for('static', filename=bungalow_obj.img_b64)}}"
                       class="h-12 w-12 bg-white rounded-full border">
-                    <span class="ml-3 font-bold text-black"> {{bungalow.title}}</span>
+                    <span class="ml-3 font-bold text-black"> {{bungalow_obj.title}}</span>
 
                   </td>
                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {{bungalow.price}}
+                    {{bungalow_obj.price}}
                   </td>
 
                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {{ bungalow.min_p|string + '-' + bungalow.max_p|string}}
+                    {{ bungalow_obj.min_p|string + '-' + bungalow_obj.max_p|string}}
                   </td>
 
                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {{bungalow.created_at}}
+                    {{bungalow_obj.created_at}}
                   </td>
 
                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {{bungalow.updated_at}}
+                    {{bungalow_obj.updated_at}}
                   </td>
 
                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {{bungalow.deleted_at}}
+                    {{bungalow_obj.deleted_at}}
                   </td>
 
                   <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    <a href="/admin/bungalowupdate/{{bungalow.uuid}}">
+                    <a href="{{ url_for('admin.update_bungalow', bungalow_id = bungalow_obj.uuid )}}">
                       <span class="inline px-3 py-2 rounded-lg hover:bg-green-900 shadow-lg bg-green-600"><i
                           class="fa-solid fa-pen-to-square"></i></span>
                     </a>
-                    <a href="#">
+                    <a href="{{ url_for('admin.delete_bungalow', bungalow_id = bungalow_obj.uuid )}}">
                       <span class="inline px-3 py-2 rounded-lg hover:bg-red-900 shadow-lg bg-red-600"><i
                           class="fa-solid fa-trash"></i></span>
                     </a>
