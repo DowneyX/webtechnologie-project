@@ -54,6 +54,6 @@ class Login_user_form(FlaskForm):
 
 class Contact_form(FlaskForm):
     email = EmailField("E-mail", validators=[DataRequired(), Email(),Length(3,50)])
-    message =  TextAreaField("Bericht.", validators=[DataRequired(), Length(2,2000)])
+    message =  TextAreaField("Bericht", validators=[DataRequired(), Length(2,2000)])
     submit = SubmitField("Verstuur")
 

@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Blueprint, flash, redirect, render_template, url_for
 from datetime import date, datetime
 from flask_login import current_user, login_required
