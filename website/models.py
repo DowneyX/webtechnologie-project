@@ -45,3 +45,11 @@ class Reservation(db.Model):
     updated_at = db.Column(db.Date(), nullable=True)
     deleted_at = db.Column(db.Date(), nullable=True)
 
+class Contact(db.Model):
+    __tablename__ = 'contact'
+    uuid = db.Column(db.Integer(), primary_key=True)
+    email = db.Column(db.String(100), unique=False)
+    message = db.Column(db.Text(), nullable=True)
+    created_at = db.Column(db.Date(), nullable=False, default=datetime.now())
+    updated_at = db.Column(db.Date(), nullable=True)
+    deleted_at = db.Column(db.Date(), nullable=True)

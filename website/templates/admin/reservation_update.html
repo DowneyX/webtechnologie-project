@@ -2,56 +2,53 @@
 {% extends "bases/base.html" %}
 
 <!--page specific title -->
-{% block title %} test {% endblock %}
+{% block title %} Update boeking {% endblock %}
 
 <!--page specific css -->
 {% block stylesheet %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/calender.css') }}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/calender.css') }}">
 {% endblock %}
 
 <!--page specific content -->
 <div class="content-container">
     {% block content %}
-
-    <div class="flex items-center justify-center min-h-screen">
-        <div class="px-8 py-6 mx-4 mt-4 text-left bg-white rounded-md shadow-lg md:w-1/3 lg:w-1/3 sm:w-1/3">
-            <h3 class="text-2xl mb-6 font-bold text-center">update reservation</h3>
-
-
-            <div class="width-450px mx-auto mt-4">
-                <form class='' action="" method="post">
-
-
+    {% include 'includes/admin_header.html' %}
+    <div class="flex justify-center">
+        <div class="px-8 py-6 mx-4 mt-4 text-left bg-gray-800 rounded-md shadow-lg md:w-1/3 lg:w-1/3 sm:w-1/3">
+            <h3 class="text-2xl mb-6 font-bold text-white text-center">Update boeking</h3>
+            <div class="width-453 px mx-auto">
+                <div class="calender bg-gray-800 border-gray-900 border-2 border-solid rounded-lg mx-auto">
+                    <div class="month bg-gray-700 rounded-t-lg">
+                        <i class="fas fa-angle-left prev"></i>
+                        <div class="date">
+                            <h1 class="text-white"></h1>
+                            <p class="text-white"></p>
+                        </div>
+                        <i class="fas fa-angle-right next"></i>
+                    </div>
+                    <div class="weekdays">
+                        <div>Maa</div>
+                        <div>Din</div>
+                        <div>Woe</div>
+                        <div>Don</div>
+                        <div>Vri</div>
+                        <div>Zat</div>
+                        <div>Zon</div>
+                    </div>
+                    <div class="days"></div>
+                </div>
+                <form class='mx-auto' action="" method="post">
                     {{form.hidden_tag()}}
                     {{form.start_date(id="begin-date", hidden='') }}
                     {{form.end_date(id="end-date", hidden='') }}
 
-                    {{ form.total.label }}
-                    {{form.total(class='w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1
-                    focus:ring-blue-600')}}
-
-                    <div class="calender mt-4">
-                        <div class="month">
-                            <i class="fas fa-angle-left prev"></i>
-                            <div class="date">
-                                <h1></h1>
-                                <p></p>
-                            </div>
-                            <i class="fas fa-angle-right next"></i>
-                        </div>
-                        <div class="weekdays">
-                            <div>Mon</div>
-                            <div>Tue</div>
-                            <div>Wed</div>
-                            <div>Thu</div>
-                            <div>Fri</div>
-                            <div>Sat</div>
-                            <div>Sun</div>
-                        </div>
-                        <div class="days"></div>
+                    <div class="mt-4">
+                        {{ form.total.label(class='text-white') }}
+                        {{form.total(class='w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1
+                        focus:ring-blue-600')}}
                     </div>
-                    {{form.submit(class="px-6 mt-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-900 mb-4
-                    w-full")}}
+
+                    {{form.submit(class=" px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-900 mt-4 w-full")}}
                 </form>
             </div>
         </div>

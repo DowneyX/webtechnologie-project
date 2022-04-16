@@ -2,21 +2,24 @@
 {% extends "bases/base.html" %}
 
 <!--page specific title -->
-{% block title %} Mijn boekingen {% endblock %}
+{% block title %} Contact formulieren overzicht {% endblock %}
 
 <!--page specific css -->
 {% block stylesheet %} {% endblock %}
 
 <!--page specific content -->
-<div class="content-container">{% block content %}
-    <div class="container mx-auto ">
+<div class="content-container">
+    {% block content %}
+    {% include 'includes/admin_header.html' %}
+
+    <div class="container mx-auto">
         <section class="relative py-16 bg-blueGray-50">
             <div class="w-full mb-12 px-4">
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-gray-800">
-                    <div class="rounded-t mb-0 px-4 py-3 border-0">
+                    <div class="rounded-t mb-0 px-2 py-3 border-0">
                         <div class="flex flex-wrap items-center">
-                            <div class="relative w-full px-4 max-w-full flex-grow flex-1 ">
-                                <h3 class="font-semibold text-lg text-white">Boekingen</h3>
+                            <div class=" relative w-full px-4 max-w-full flex-grow flex-1 ">
+                                <h3 class="font-semibold text-lg text-white">Contact formulieren</h3>
                             </div>
                         </div>
                     </div>
@@ -29,60 +32,59 @@
                                         ID</th>
                                     <th
                                         class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
-                                        Bungalow</th>
+                                        E-mail</th>
                                     <th
                                         class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
-                                        Start datum</th>
+                                        Bericht</th>
                                     <th
                                         class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
-                                        Eind datum </th>
+                                        Gemaakt_op</th>
                                     <th
                                         class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
-                                        Totaal </th>
+                                        Aangepast_op</th>
                                     <th
                                         class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
-                                        Opties
-                                    </th>
-
+                                        Verwijderd_op </th>
+                                    <th
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                                        Opties</th>
                                 </tr>
                             </thead>
 
-                            {% for join in joinlist %}
+                            {% for contact_obj in contacts_obj %}
                             <tbody>
                                 <tr>
                                     <th
                                         class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        {{join[0].uuid}}
+                                        {{contact_obj.uuid}}
                                     </th>
                                     <td
-                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                                        <img src="{{ url_for('static', filename=join[1].img_b64)}}"
-                                            class="h-12 w-12 bg-white rounded-full border">
-                                        <span class="ml-3 font-bold text-gray-500"> {{join[1].title}} </span>
+                                        class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        {{contact_obj.email}}
+                                    </td>
+                                    <td
+                                        class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
+                                        {{contact_obj.message}}
+                                    </td>
 
-                                    </td>
                                     <td
                                         class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        {{join[0].start_date}}
+                                        {{contact_obj.created_at}}
                                     </td>
+
                                     <td
                                         class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        {{join[0].end_date}}
+                                        {{contact_obj.updated_at}}
                                     </td>
+
                                     <td
                                         class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        {{join[0].total}}
+                                        {{contact_obj.deleted_at}}
                                     </td>
+
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        <a
-                                            href="{{ url_for('views.update_reservation', reservation_id = join[0].uuid)}}">
-                                            <span
-                                                class="inline px-3 py-2 rounded-lg hover:bg-green-900 shadow-lg bg-green-600"><i
-                                                    class="fa-solid fa-pen-to-square"></i></span>
-                                        </a>
-                                        <a
-                                            href="{{ url_for('views.delete_reservation', reservation_id = join[0].uuid)}}">
+                                        <a href="{{ url_for('admin.delete_contact', contact_id = contact_obj.uuid )}}">
                                             <span
                                                 class="inline px-3 py-2 rounded-lg hover:bg-red-900 shadow-lg bg-red-600"><i
                                                     class="fa-solid fa-trash"></i></span>
@@ -97,5 +99,6 @@
             </div>
         </section>
     </div>
+
     {% endblock %}
 </div>

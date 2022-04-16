@@ -2,7 +2,7 @@
 {% extends "bases/base.html" %}
 
 <!--page specific title -->
-{% block title %} user overview {% endblock %}
+{% block title %} Gebruikers overzicht {% endblock %}
 
 <!--page specific css -->
 {% block stylesheet %} {% endblock %}
@@ -15,12 +15,11 @@
     <div class="container mx-auto">
         <section class="relative py-16 bg-blueGray-50">
             <div class="w-full mb-12 px-4">
-                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded 
-  bg-white text-black">
+                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-gray-800">
                     <div class="rounded-t mb-0 px-2 py-3 border-0">
                         <div class="flex flex-wrap items-center">
                             <div class=" relative w-full px-4 max-w-full flex-grow flex-1 ">
-                                <h3 class="font-semibold text-lg text-black">Users</h3>
+                                <h3 class="font-semibold text-lg text-white">Users</h3>
                             </div>
                         </div>
                     </div>
@@ -29,32 +28,32 @@
                             <thead>
                                 <tr>
                                     <th
-                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left  text-black border-gray-800">
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
                                         ID</th>
                                     <th
-                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                                        Name</th>
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                                        Naam</th>
                                     <th
-                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left  text-black border-gray-800">
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
                                         E-mail</th>
                                     <th
-                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                                        Phone number</th>
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                                        Telefoon nummer</th>
                                     <th
-                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                                        role</th>
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                                        Rol</th>
                                     <th
-                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                                        created_at</th>
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                                        Gemaakt_op</th>
                                     <th
-                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                                        updated_at</th>
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                                        Aangepast_op</th>
                                     <th
-                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                                        deleted_at </th>
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                                        Verwijderd_op </th>
                                     <th
-                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                                        options</th>
+                                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                                        Opties</th>
                                 </tr>
                             </thead>
 
@@ -62,46 +61,46 @@
                             <tbody>
                                 <tr>
                                     <th
-                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{user_obj.uuid}}
                                     </th>
                                     <td
-                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{user_obj.first_name + ' ' + user_obj.last_name}}
                                     </td>
                                     <td
-                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{user_obj.email}}
                                     </td>
 
                                     <td
-                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{user_obj.phone_nr}}
                                     </td>
 
                                     <td
-                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{user_obj.role}}
                                     </td>
 
                                     <td
-                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{user_obj.created_at}}
                                     </td>
 
                                     <td
-                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{user_obj.updated_at}}
                                     </td>
 
                                     <td
-                                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{user_obj.deleted_at}}
                                     </td>
 
                                     <td
                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                        <a href="#">
+                                        <a href="{{ url_for('admin.update_user', user_id = user_obj.uuid )}}">
                                             <span
                                                 class="inline px-3 py-2 rounded-lg hover:bg-green-900 shadow-lg bg-green-600"><i
                                                     class="fa-solid fa-pen-to-square"></i></span>

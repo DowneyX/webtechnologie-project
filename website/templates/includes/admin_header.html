@@ -1,14 +1,18 @@
-<div class="container mx-auto flex items-center justify-center">
+<div class="container mx-auto flex justify-center">
     <ul class="flex">
         <li class="mr-6">
-            <a class="text-blue-500 hover:text-blue-800" href="{{ url_for('admin.overview_bungalows')}}">bungalows</a>
+            <a class="text-gray-500 hover:text-gray-200" href="{{ url_for('admin.overview_bungalows')}}">bungalows</a>
         </li>
         <li class="mr-6">
-            <a class="text-blue-500 hover:text-blue-800" href="{{ url_for('admin.overview_users')}}">users</a>
+            <a class="text-gray-500 hover:text-gray-200" href="{{ url_for('admin.overview_users')}}">gebruikers</a>
         </li>
         <li class="mr-6">
-            <a class="text-blue-500 hover:text-blue-800"
-                href="{{ url_for('admin.overview_reservations')}}">reservations</a>
+            <a class="text-gray-500 hover:text-gray-200"
+                href="{{ url_for('admin.overview_reservations')}}">boekingen</a>
+        </li>
+        <li class="mr-6">
+            <a class="text-gray-500 hover:text-gray-200" href="{{ url_for('admin.overview_contacts')}}">contact
+                formulieren</a>
         </li>
     </ul>
 </div>

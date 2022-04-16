@@ -2,7 +2,7 @@
 {% extends "bases/base.html" %}
 
 <!--page specific title -->
-{% block title %} bungalow overview {% endblock %}
+{% block title %} Bungalow overzicht {% endblock %}
 
 <!--page specific css -->
 {% block stylesheet %} {% endblock %}
@@ -15,12 +15,11 @@
   <div class="container mx-auto">
     <section class="relative py-16 bg-blueGray-50">
       <div class="w-full mb-12 px-4">
-        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded 
-  bg-white text-black">
+        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-gray-800">
           <div class="rounded-t mb-0 px-2 py-3 border-0">
             <div class="flex flex-wrap items-center">
               <div class=" relative w-full px-4 max-w-full flex-grow flex-1 ">
-                <h3 class="inline font-semibold text-lg text-black">Bungalows</h3>
+                <h3 class="inline font-semibold text-lg text-white">Bungalows</h3>
                 <a href="{{ url_for('admin.create_bungalow')}}">
                   <span
                     class="inline px-3 rounded-lg hover:bg-green-900 shadow-lg py-1 bg-green-600 absolute right-0"><i
@@ -34,64 +33,68 @@
               <thead>
                 <tr>
                   <th
-                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left  text-black border-gray-800">
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
                     ID</th>
                   <th
-                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left  text-black border-gray-800">
-                    bungalow</th>
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                    Bungalow</th>
                   <th
-                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                    price</th>
-
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                    Prijs</th>
                   <th
-                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                    number of people</th>
-
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                    Hoeveelheid mensen</th>
                   <th
-                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                    created_at</th>
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                    Gemaakt_op</th>
                   <th
-                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                    updated_at</th>
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                    Aangepast_op</th>
                   <th
-                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                    deleted_at </th>
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                    Verwijderd_op </th>
                   <th
-                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left text-black border-gray-800">
-                    options</th>
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-700 text-white border-gray-800">
+                    Opties</th>
                 </tr>
               </thead>
 
               {% for bungalow_obj in bungalows_obj %}
               <tbody>
                 <tr>
-                  <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                  <th
+                    class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {{bungalow_obj.uuid}}
                   </th>
                   <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                     <img src="{{ url_for('static', filename=bungalow_obj.img_b64)}}"
                       class="h-12 w-12 bg-white rounded-full border">
-                    <span class="ml-3 font-bold text-black"> {{bungalow_obj.title}}</span>
+                    <span class="ml-3 font-bold text-gray-500"> {{bungalow_obj.title}}</span>
 
                   </td>
-                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td
+                    class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {{bungalow_obj.price}}
                   </td>
 
-                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td
+                    class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {{ bungalow_obj.min_p|string + '-' + bungalow_obj.max_p|string}}
                   </td>
 
-                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td
+                    class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {{bungalow_obj.created_at}}
                   </td>
 
-                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td
+                    class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {{bungalow_obj.updated_at}}
                   </td>
 
-                  <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td
+                    class="border-t-0 text-gray-500 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {{bungalow_obj.deleted_at}}
                   </td>
 
